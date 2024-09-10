@@ -1,6 +1,5 @@
 import 'package:get/get_connect/connect.dart';
-
-import '../models/book_model.dart';
+import 'package:books_api_flutter/models/book_model.dart';
 
 class NytApiService extends GetConnect {
   final String apiKey = 'MINHA-CHAVE-API';
@@ -15,8 +14,8 @@ class NytApiService extends GetConnect {
     try {
       final response = await get(
           '/svc/books/v3/lists/current/hardcover-fiction.json?api-key=$apiKey');
+
       if (response.statusCode == 200) {
-        // abaixo pego a  primeira lista que retornou
         final List<dynamic> resultado = response.body["results"]['books'];
 
         return resultado.map((json) => BookModel.fromJson(json)).toList();

@@ -1,33 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
-class BookDetailPage extends StatefulWidget {
+class BookDetailPage extends StatelessWidget {
   const BookDetailPage({super.key});
-
-  @override
-  State<BookDetailPage> createState() => _BookDetailPageState();
-}
-
-class _BookDetailPageState extends State<BookDetailPage> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   if (WebViewPlatform.instance == null && WebViewPlatform.isAvailable()) {
-  //     WebViewPlatform.instance = SurfaceAndroidWebView();
-  //   }
-  // }
-
-  // void _openBookPage(url) async {
-  //   final Uri uri = Uri.parse(url);
-  //   print(uri.authority);
-  //   if (await canLaunchUrl(uri)) {
-  //     await launchUrl(uri, mode: LaunchMode.externalApplication);
-  //     // } else {
-  //     //   throw 'Não foi possível abrir o link $uri';
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

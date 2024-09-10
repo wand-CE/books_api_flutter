@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class BookTile extends StatelessWidget {
-  final String book_cover_path;
-  final String book_title;
-  final String book_description;
-  final VoidCallback button_function;
+  final String bookCoverPath;
+  final String bookTitle;
+  final String bookDescription;
+  final VoidCallback buttonFunction;
 
   const BookTile({
     super.key,
-    required this.book_cover_path,
-    required this.book_title,
-    required this.book_description,
-    required this.button_function,
+    required this.bookTitle,
+    required this.bookDescription,
+    required this.bookCoverPath,
+    required this.buttonFunction,
   });
 
   @override
@@ -25,12 +25,15 @@ class BookTile extends StatelessWidget {
         ),
         tileColor: Colors.grey[300],
         leading: Image.network(
-          book_cover_path,
+          bookCoverPath,
           width: 70,
         ),
-        title: Text(book_title),
-        subtitle: Text(book_description),
-        onTap: button_function,
+        title: Text(
+          bookTitle,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(bookDescription),
+        onTap: buttonFunction,
       ),
     );
   }

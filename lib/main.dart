@@ -8,8 +8,8 @@ Future<void> main() async {
   // funcionamento de apps de terceiros
 
   runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    routes: AppRoutes.define(),
     initialRoute: AppRoutes.homePage,
+    routes: AppRoutes.define(),
+    debugShowCheckedModeBanner: false,
   ));
 }

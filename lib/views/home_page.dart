@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final BookController _bookController = Get.put(BookController());
+  final BookApiController _bookController = Get.put(BookApiController());
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +52,10 @@ class _HomePageState extends State<HomePage> {
                   BookModel currentBook = booksList[index];
 
                   return BookTile(
-                    book_cover_path: currentBook.cover,
-                    book_title: currentBook.title,
-                    book_description: currentBook.description,
-                    button_function: () => Get.toNamed(
+                    bookCoverPath: currentBook.cover,
+                    bookTitle: currentBook.title,
+                    bookDescription: currentBook.description,
+                    buttonFunction: () => Get.toNamed(
                       '/bookDetailPage',
                       arguments: {
                         'bookTitle': currentBook.title,
