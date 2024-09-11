@@ -89,9 +89,12 @@ class BookDetailPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  textStyle: TextStyle(fontSize: 18),
+                  backgroundColor: Colors.blueGrey,
                 ),
-                child: Text("Comprar Livro"),
+                child: Text(
+                  "Comprar Livro",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
               ),
             ),
           ],

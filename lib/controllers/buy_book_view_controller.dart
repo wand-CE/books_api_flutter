@@ -3,13 +3,19 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class BuyBookViewController extends GetxController {
   late WebViewController webViewController;
+  var isLoading = true.obs;
 
-  final String url;
-
-  BuyBookViewController(this.url) {
+  BuyBookViewController() {
     webViewController = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(url));
+      ..setJavaScriptMode(JavaScriptMode.unrestricted);
+  }
+
+  Future<void> loadPage(url) async {
+    isLoading.value = true;
+    await Future.delayed(Duration(seconds: 2));
+    webViewController.loadRequest(Uri.parse(url)).then((_) {
+      isLoading.value = false;
+    });
   }
 
   void reloadPage() {

@@ -4,15 +4,10 @@ import 'package:books_api_flutter/views/my_widgets/book_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final BookApiController _bookController = Get.put(BookApiController());
+  final BookApiController _bookApiController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,58 +15,40 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Livros mais populares',
+          'Livros mais populares do NYT',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red[900],
         iconTheme: IconThemeData(color: Colors.white70),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, '/loginPage'),
-                child: Text('s'))
-          ],
-        ),
-      ),
-      body: FutureBuilder<List<BookModel>>(
-          future: _bookController.getBooks(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(
-                  child: Text(
-                snapshot.error.toString().replaceFirst("Exception:", ""),
-              ));
-            } else if (snapshot.hasData) {
-              final booksList = snapshot.data!;
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  BookModel currentBook = booksList[index];
+      body: Obx(() {
+        if (_bookApiController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+        final booksList = _bookApiController.books;
 
-                  return BookTile(
-                    bookCoverPath: currentBook.cover,
-                    bookTitle: currentBook.title,
-                    bookDescription: currentBook.description,
-                    buttonFunction: () => Get.toNamed(
-                      '/bookDetailPage',
-                      arguments: {
-                        'bookTitle': currentBook.title,
-                        'bookDescription': currentBook.description,
-                        'bookCover': currentBook.cover,
-                        'bookLink': currentBook.bookLink,
-                      },
-                    ),
-                  );
+        return ListView.builder(
+          itemCount: booksList.length,
+          itemBuilder: (context, index) {
+            BookModel currentBook = booksList[index];
+
+            return BookTile(
+              bookCoverPath: currentBook.cover,
+              bookTitle: currentBook.title,
+              bookDescription: currentBook.description,
+              buttonFunction: () => Get.toNamed(
+                '/bookDetailPage',
+                arguments: {
+                  'bookTitle': currentBook.title,
+                  'bookDescription': currentBook.description,
+                  'bookCover': currentBook.cover,
+                  'bookLink': currentBook.bookLink,
                 },
-                itemCount: booksList.length,
-              );
-            } else {
-              return Center(child: Text('Nenhum livro disponível'));
-            }
-          }),
+              ),
+            );
+          },
+        );
+      }),
     );
   }
 }

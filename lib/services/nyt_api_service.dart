@@ -1,19 +1,15 @@
-import 'package:get/get_connect/connect.dart';
-import 'package:books_api_flutter/models/book_model.dart';
+import 'package:get/get.dart';
+
+import '../models/book_model.dart';
 
 class NytApiService extends GetConnect {
   final String apiKey = 'MINHA-CHAVE-API';
-
-  @override
-  void onInit() {
-    super.onInit();
-    httpClient.baseUrl = "https://api.nytimes.com";
-  }
+  final url =
+      "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json";
 
   Future<List<BookModel>> fetchBooks() async {
     try {
-      final response = await get(
-          '/svc/books/v3/lists/current/hardcover-fiction.json?api-key=$apiKey');
+      final response = await get('$url?api-key=$apiKey');
 
       if (response.statusCode == 200) {
         final List<dynamic> resultado = response.body["results"]['books'];
