@@ -10,10 +10,10 @@ class BuyBookViewController extends GetxController {
       ..setJavaScriptMode(JavaScriptMode.unrestricted);
   }
 
-  Future<void> loadPage(url) async {
+  void loadPage(url) {
     isLoading.value = true;
-    await Future.delayed(Duration(seconds: 2));
-    webViewController.loadRequest(Uri.parse(url)).then((_) {
+    webViewController.loadRequest(Uri.parse(url)).then((_) async {
+      await Future.delayed(Duration(seconds: 3));
       isLoading.value = false;
     });
   }

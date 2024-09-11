@@ -36,6 +36,7 @@ class HomePage extends StatelessWidget {
               bookCoverPath: currentBook.cover,
               bookTitle: currentBook.title,
               bookDescription: currentBook.description,
+              bookAuthor: currentBook.author,
               buttonFunction: () => Get.toNamed(
                 '/bookDetailPage',
                 arguments: {

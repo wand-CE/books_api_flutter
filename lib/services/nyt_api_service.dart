@@ -19,7 +19,6 @@ class NytApiService extends GetConnect {
         throw Exception('Falha ao retornar os livros');
       }
     } catch (e) {
-      print(e);
       throw Exception('Não foi possível retornar os livros');
     }
   }
